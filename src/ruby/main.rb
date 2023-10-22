@@ -115,8 +115,6 @@ class SetupDatabase
         10.times do
             begin
                 neo4j_query("MATCH (n) RETURN n LIMIT 1;")
-                setup_constraints_and_indexes(CONSTRAINTS_LIST, INDEX_LIST)
-                debug "Setup finished."
                 break
             rescue
                 debug $!
@@ -143,8 +141,10 @@ class Main < Sinatra::Base
         ]
 
         setup = SetupDatabase.new()
+        setup.setup(self)
         setup.wait_for_neo4j()
         $neo4j.setup_constraints_and_indexes(CONSTRAINTS_LIST, INDEX_LIST)
+        debug "Server is up and running!"
 
         # create admin users in database if they don't exist yet
         ADMIN_USERS.each do |email|
@@ -263,7 +263,7 @@ class Main < Sinatra::Base
         logout()
         respond(:ok => 'yeah')
     end
-    
+
     get '/*' do
         path = request.path
         if path == '/'
@@ -304,9 +304,9 @@ class Main < Sinatra::Base
             redirect "#{WEB_ROOT}/", 302
         end
         path = path + '.html' unless path.include?('.')
-        respond_with_file(File.join(@@static_dir, path)) do |content, mime_type|
+        respond_with_file(File.join('/src/static', path)) do |content, mime_type|
             if mime_type == 'text/html'
-                template = File.read(File.join(@@static_dir, '_template.html'))
+                template = File.read(File.join('/src/static', '_template.html'))
                 template.sub!('#{CONTENT}', content)
                 s = template
                 while true

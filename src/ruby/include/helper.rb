@@ -3,7 +3,7 @@ require "sinatra/base"
 
 class Main < Sinatra::Base
     include Neo4jBolt
-    
+
     def assert(condition, message = "assertion failed", suppress_backtrace = false, delay = nil)
         unless condition
             debug_error message
@@ -80,9 +80,7 @@ class Main < Sinatra::Base
     end
 
     after '*' do
-        if NEED_NEO4J
-            cleanup_neo4j()
-        end
+        cleanup_neo4j()
     end
 
     def respond(hash = {})
