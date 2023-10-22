@@ -1,0 +1,56 @@
+@font-face {
+    font-family: 'Alegreya';
+    font-style: normal;
+    font-weight: 400;
+    font-display: swap;
+    src: url(fonts/Alegreya/static/Alegreya-Regular.ttf) format('truetype');
+}
+@font-face {
+    font-family: 'Alegreya';
+    font-style: italic;
+    font-weight: 400;
+    font-display: swap;
+    src: url(fonts/Alegreya/static/Alegreya-Italic.ttf) format('truetype');
+}
+@font-face {
+    font-family: 'Alegreya';
+    font-style: normal;
+    font-weight: 700;
+    font-display: swap;
+    src: url(fonts/Alegreya/static/Alegreya-Bold.ttf) format('truetype');
+}
+@font-face {
+    font-family: 'Alegreya';
+    font-style: italic;
+    font-weight: 700;
+    font-display: swap;
+    src: url(fonts/Alegreya/static/Alegreya-BoldItalic.ttf) format('truetype');
+}
+@font-face {
+    font-family: 'Alegreya SC';
+    font-style: normal;
+    font-weight: 400;
+    font-display: swap;
+    src: url(fonts/Alegreya_SC/AlegreyaSC-Regular.ttf) format('truetype');
+}
+@font-face {
+    font-family: 'Alegreya SC';
+    font-style: italic;
+    font-weight: 400;
+    font-display: swap;
+    src: url(fonts/Alegreya_SC/AlegreyaSC-Italic.ttf) format('truetype');
+}
+@font-face {
+    font-family: 'Alegreya SC';
+    font-style: normal;
+    font-weight: 500;
+    font-display: swap;
+    src: url(fonts/Alegreya_SC/AlegreyaSC-Medium.ttf) format('truetype');
+}
+@font-face {
+    font-family: 'Alegreya SC';
+    font-style: italic;
+    font-weight: 500;
+    font-display: swap;
+    src: url(fonts/Alegreya_SC/AlegreyaSC-MediumItalic.ttf) format('truetype');
+}

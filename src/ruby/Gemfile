@@ -1,0 +1,7 @@
+source 'https://rubygems.org'
+gem 'mail'
+gem 'neo4j_bolt'
+gem 'rerun'
+gem 'sinatra'
+gem 'sinatra-contrib'
+gem 'thin'

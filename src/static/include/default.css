@@ -1,0 +1,130 @@
+body {
+    font-family: 'Alegreya', sans-serif;
+    font-size: 13pt;
+    margin-bottom: 100px;
+}
+
+h1, h2 {
+    font-family: 'Alegreya SC', sans-serif;
+    font-weight: 500;
+    margin: 1em 0;
+}
+
+footer {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background-color: #f4f4f4;
+    border-top: 1px solid #ccc;
+    box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.2);
+    padding: 0.5em 1em;
+    font-size: 80%;
+    text-align: center;
+    color: #888;
+    z-index: 2;
+}
+
+footer a {
+    color: #888;
+    text-decoration: none;
+}
+
+footer a:hover {
+    text-decoration: underline;
+}
+
+.table-container {
+    overflow-x: auto;
+}
+
+.header {
+    border-bottom: 1px solid #ccc;
+    box-shadow: 0 0 30px rgba(0, 0, 0, 0.2);
+    margin-bottom: 2em;
+}
+
+.title {
+    font-family: 'Alegreya SC', sans-serif;
+    font-weight: 500;
+    font-size: 3rem;
+    padding: 0.5em 0;
+}
+
+.title a {
+    color: unset;
+    text-decoration: none;
+}
+
+.menu {
+    background-color: rgba(255, 255, 255, 0.7);
+    text-align: right;
+    border-top: 1px solid #ddd;
+}
+
+
+.api_messages {
+    box-shadow: 0 0 1px rgba(0, 0, 0, 0.2);
+    z-index: 100;
+    border: 1px solid #ddd;
+}
+
+form {
+    border: 1px solid #ddd;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.15);
+    border-radius: 1em;
+    padding: 1em;
+}
+
+a.nav-link {
+    margin-left: 1em;
+}
+
+.btn {
+    white-space: nowrap;
+}
+
+.input-group {
+    flex-wrap: nowrap;
+}
+
+.table td, .table th {
+    white-space: nowrap;
+}
+
+@media (max-width: 768px) {
+    .title {
+        font-size: 2rem;
+    }
+    .hide-on-mobile {
+        display: none;
+    }
+}
+
+@media (max-width: 992px) {
+    a.nav-link {
+        margin-left: 0.5em;
+        text-align: left;
+    }
+}
+
+@media (min-width: 1200px) {
+    .nav-link.active {
+        background-color: #fff;
+        border-radius: 0.5em;
+        padding-left: 1em!important;
+        padding-right: 1em!important;
+        box-shadow: 1px 1px 5px rgba(0,0,0,0.2);
+        outline: 1px solid #ccc;
+    }
+}
+
+.navbar {
+    backdrop-filter: blur(5px);
+}
+
+.navbar-nav > a > .fa {
+    display: inline-block;
+    width: 1.2em;
+    text-align: center;
+}
