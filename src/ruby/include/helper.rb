@@ -1,87 +1,9 @@
 require "neo4j_bolt"
 require "sinatra/base"
-require './include/constraints.rb'
-
-def debug(message, index = 0)
-    index = 0
-    begin
-        while index < caller_locations.size - 1 && ["transaction", "neo4j_query", "neo4j_query_expect_one"].include?(caller_locations[index].base_label)
-            index += 1
-        end
-    rescue
-        index = 0
-    end
-    l = caller_locations[index]
-    ls = ""
-    begin
-        ls = "#{l.path.sub("/app/", "")}:#{l.lineno} @ #{l.base_label}"
-    rescue
-        ls = "#{l[0].sub("/app/", "")}:#{l[1]}"
-    end
-    STDERR.puts "#{DateTime.now.strftime("%H:%M:%S")} [#{ls}] #{message}"
-end
-
-def debug_error(message)
-    l = caller_locations.first
-    ls = ""
-    begin
-        ls = "#{l.path.sub("/app/", "")}:#{l.lineno} @ #{l.base_label}"
-    rescue
-        ls = "#{l[0].sub("/app/", "")}:#{l[1]}"
-    end
-    STDERR.puts "#{DateTime.now.strftime("%H:%M:%S")} [ERROR] [#{ls}] #{message}"
-end
-
-class Neo4jGlobal
-    include Neo4jBolt
-end
-
-if NEED_NEO4J
-    $neo4j = Neo4jGlobal.new
-end
-
-class SetupDatabase
-    include Neo4jBolt
-
-    def setup(main)
-        if NEED_NEO4J
-            wait_for_neo4j
-            delay = 1
-            10.times do
-                begin
-                    neo4j_query("MATCH (n) RETURN n LIMIT 1;")
-                    setup_constraints_and_indexes(CONSTRAINTS_LIST, INDEX_LIST)
-                    debug "Setup finished."
-                    break
-                rescue
-                    debug $!
-                    debug "Retrying setup after #{delay} seconds..."
-                    sleep delay
-                    delay += 1
-                end
-            end
-        end
-    end
-end
 
 class Main < Sinatra::Base
     include Neo4jBolt
-
-    def self.collect_data
-        if NEED_NEO4J
-            $neo4j.wait_for_neo4j
-        end
-    end
-
-    configure do
-        self.collect_data()
-        set :show_exceptions, false
-        setup = SetupDatabase.new()
-        setup.setup(self)
-        @@static_dir = File.absolute_path(File.join(Dir.pwd, '..', 'static'))
-        debug("Server is up and running!")
-    end
-
+    
     def assert(condition, message = "assertion failed", suppress_backtrace = false, delay = nil)
         unless condition
             debug_error message

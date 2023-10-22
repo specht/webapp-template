@@ -42,6 +42,17 @@ def debug(message, index = 0)
     STDERR.puts "#{DateTime.now.strftime('%H:%M:%S')} [#{ls}] #{message}"
 end
 
+def debug_error(message)
+    l = caller_locations.first
+    ls = ""
+    begin
+        ls = "#{l.path.sub("/app/", "")}:#{l.lineno} @ #{l.base_label}"
+    rescue
+        ls = "#{l[0].sub("/app/", "")}:#{l[1]}"
+    end
+    STDERR.puts "#{DateTime.now.strftime("%H:%M:%S")} [ERROR] [#{ls}] #{message}"
+end
+
 class RandomTag
     BASE_31_ALPHABET = '0123456789bcdfghjklmnpqrstvwxyz'
     def self.to_base31(i)
